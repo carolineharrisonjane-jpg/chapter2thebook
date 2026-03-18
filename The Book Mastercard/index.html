@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+<title>The Book x Mastercard</title>
+<style>
+html, body { margin:0; padding:0; box-sizing:border-box; background:#0d0d0d; font-family:'Segoe UI',Arial,sans-serif; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:16px; }
+*, *::before, *::after { box-sizing:border-box; }
+#deck { width:100%; max-width:960px; }
+#slide { width:100%; position:relative; overflow:hidden; border-radius:4px; box-shadow:0 8px 60px rgba(0,0,0,.6); }
+#slide::before { content:''; display:block; padding-top:56.25%; }
+#slide-inner { position:absolute; top:0; left:0; right:0; bottom:0; }
+.nav { display:flex; align-items:center; justify-content:space-between; padding:10px 0; margin-top:8px; }
+.btn { background:transparent; border:1px solid #444; color:#666; padding:7px 20px; border-radius:2px; cursor:pointer; font-family:'Segoe UI',Arial,sans-serif; font-size:11px; letter-spacing:1px; }
+.btn:disabled { opacity:.2; cursor:not-allowed; }
+.btnn { background:#9E57F6; border:none; color:#fff; font-weight:700; padding:7px 20px; border-radius:2px; cursor:pointer; font-family:'Segoe UI',Arial,sans-serif; font-size:11px; letter-spacing:1px; }
+.btnn:disabled { background:#1e1e1e; color:#333; }
+.dots { display:flex; gap:5px; align-items:center; }
+.dot { height:5px; border-radius:3px; cursor:pointer; border:none; padding:0; }
+.don { background:#9E57F6; width:18px; }
+.dof { background:#2a2b2d; width:5px; }
+.counter { text-align:center; font-size:10px; color:#444; letter-spacing:1px; text-transform:uppercase; margin-top:4px; }
+.s { width:100%; height:100%; padding:4.5% 5.5%; }
+.lbl { font-size:1vw; font-weight:600; color:#73F5D1; letter-spacing:2px; text-transform:uppercase; margin-bottom:1.2%; }
+.hdg { font-size:2.8vw; font-weight:300; line-height:1.1; margin-bottom:2%; }
+.hdg-w { color:#fff; }
+.hdg-b { color:#1A1B1D; }
+.wm { position:absolute; top:3%; right:3.5%; display:flex; align-items:center; gap:8px; opacity:.35; }
+.mc { display:flex; align-items:center; }
+.mcr { border-radius:50%; background:#EB001B; }
+.mco { border-radius:50%; background:#F79E1B; }
+.tblogo { display:flex; align-items:baseline; gap:3px; }
+.tb1 { font-weight:300; color:#fff; }
+.tb2 { font-weight:700; color:#9E57F6; }
+.wave { position:absolute; inset:0; width:100%; height:100%; opacity:.07; pointer-events:none; }
+.trow { display:grid; grid-template-columns:1.4fr 1fr 1fr; padding:1.2% 2%; border-top:1px solid #E8E8E8; }
+.tcell { font-size:1.1vw; color:#1A1B1D; }
+.tgrey { color:#909090; text-align:center; }
+.tbook { font-weight:600; color:#1A1B1D; text-align:center; display:flex; align-items:center; justify-content:center; gap:4px; }
+.tdot { width:5px; height:5px; border-radius:50%; background:#73F5D1; flex-shrink:0; display:inline-block; }
+.card { background:#fff; border-radius:3px; padding:3%; }
+.p-border { border-top:2px solid #9E57F6; }
+.t-border { border-top:2px solid #73F5D1; }
+.cnum { font-size:1vw; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:4%; }
+.cpurp { color:#9E57F6; }
+.cteal { color:#73F5D1; }
+.ctitle { font-size:1.3vw; font-weight:600; color:#1A1B1D; margin-bottom:3%; }
+.cbody { font-size:1.1vw; color:#909090; }
+.badge { width:44px; height:44px; border-radius:50%; background:#212B5F; border:1.5px solid #9E57F6; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1.2vw; font-weight:600; color:#fff; }
+.pname { font-size:1.4vw; font-weight:600; color:#1A1B1D; }
+.prole { font-size:1vw; color:#909090; margin:.4% 0; }
+.pnote { font-size:1.1vw; color:#1A1B1D; line-height:1.5; font-weight:300; }
+</style>
+</head>
+<body>
+<div id="deck">
+  <div id="slide"><div id="slide-inner"></div></div>
+  <div class="nav">
+    <button class="btn" id="prev" onclick="go(-1)">&#8592; PREV</button>
+    <div class="dots" id="dots"></div>
+    <button class="btnn" id="next" onclick="go(1)">NEXT &#8594;</button>
+  </div>
+  <div class="counter" id="counter"></div>
+</div>
+
+<script>
+(function(){
+var slides = [
+
+// 0 COVER
+['cover','<div class="s" style="background:#1A1B1D;display:flex;flex-direction:column;justify-content:space-between;height:100%;position:relative;">'
++'<svg class="wave" viewBox="0 0 900 506" preserveAspectRatio="xMidYMid slice"><path d="M-50 300 Q200 100 450 350 T900 200" stroke="#73F5D1" stroke-width="1.5" fill="none"/><path d="M-50 380 Q250 180 500 400 T950 280" stroke="#73F5D1" stroke-width="1" fill="none"/><circle cx="720" cy="120" r="200" fill="#73F5D1" opacity="0.04"/></svg>'
++'<div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;"><span style="font-size:1.4vw;font-weight:700;color:#fff;letter-spacing:3px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:2.4vw;height:2.4vw;"></div><div class="mco" style="width:2.4vw;height:2.4vw;margin-left:-1vw;"></div></div></div>'
++'<div style="position:relative;z-index:1;">'
++'<div class="tblogo" style="font-size:2.4vw;"><span class="tb1">The&nbsp;</span><span class="tb2">Book</span></div>'
++'<div style="margin-top:3%;"></div>'
++'<div style="font-size:.9vw;font-weight:600;color:#73F5D1;letter-spacing:2px;text-transform:uppercase;margin-bottom:2.5%;">Talent Intelligence Platform</div>'
++'<div style="font-size:3.6vw;font-weight:300;color:#fff;line-height:1.1;max-width:72%;margin-bottom:3%;">The talent gap is costing Mastercard deals</div>'
++'<div style="font-size:1.7vw;color:#73F5D1;">The Book solves it &mdash; in hours, not months</div>'
++'</div>'
++'<div style="display:flex;justify-content:space-between;position:relative;z-index:1;">'
++'<span style="font-size:.9vw;color:#444;">Confidential &middot; Prepared for Mastercard</span>'
++'<span style="font-size:.9vw;color:#444;">chapter2.agency</span>'
++'</div></div>'],
+
+// 1 WHO WE ARE
+['light','<div class="s" style="background:#fff;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">01 / Who We Are</div>'
++'<div class="hdg hdg-b">We are the future-looking narrative of RPO</div>'
++'<div style="display:grid;grid-template-columns:1fr 1fr;gap:3%;align-items:start;">'
++'<div style="background:#1A1B1D;border-radius:6px;overflow:hidden;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">'
++'<svg viewBox="0 0 300 260" style="width:100%;height:100%;"><circle cx="150" cy="88" r="78" fill="#73F5D1" opacity="0.55"/><circle cx="105" cy="172" r="78" fill="#73F5D1" opacity="0.55"/><circle cx="195" cy="172" r="78" fill="#73F5D1" opacity="0.55"/><text x="150" y="40" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">Talent</text><text x="150" y="55" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">Delivery</text><text x="82" y="200" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">AI</text><text x="82" y="215" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">Enabled</text><text x="218" y="200" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">Employer</text><text x="218" y="215" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="700" font-size="12">Branding</text><text x="113" y="118" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="600" font-size="9">Talent</text><text x="113" y="130" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="600" font-size="9">Advisory</text><text x="187" y="118" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="600" font-size="9">C2</text><text x="187" y="130" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="600" font-size="9">Network</text><text x="150" y="168" text-anchor="middle" fill="#1A1B1D" font-family="Segoe UI,Arial,sans-serif" font-weight="800" font-size="22">C2.</text></svg>'
++'</div>'
++'<div>'
++'<div style="border-left:2px solid #73F5D1;padding-left:4%;margin-bottom:4%;"><div style="font-size:.9vw;font-weight:600;color:#73F5D1;letter-spacing:1px;text-transform:uppercase;margin-bottom:2%;">01</div><div style="font-size:1.3vw;font-weight:600;color:#1A1B1D;margin-bottom:2%;">Scalable Talent Teams</div><div style="font-size:1.1vw;color:#909090;line-height:1.6;">Our in-house teams integrate with your culture and systems, using data-driven strategies to deliver scalable, agile hiring.</div></div>'
++'<div style="border-left:2px solid #73F5D1;padding-left:4%;margin-bottom:4%;"><div style="font-size:.9vw;font-weight:600;color:#73F5D1;letter-spacing:1px;text-transform:uppercase;margin-bottom:2%;">02</div><div style="font-size:1.3vw;font-weight:600;color:#1A1B1D;margin-bottom:2%;">AI Enabled &amp; Data Insights</div><div style="font-size:1.1vw;color:#909090;line-height:1.6;">Our AI-powered tech stack optimises sourcing and recruitment efficiency, targeting the right candidates faster.</div></div>'
++'<div style="border-left:2px solid #73F5D1;padding-left:4%;"><div style="font-size:.9vw;font-weight:600;color:#73F5D1;letter-spacing:1px;text-transform:uppercase;margin-bottom:2%;">03</div><div style="font-size:1.3vw;font-weight:600;color:#1A1B1D;margin-bottom:2%;">Employer Branding</div><div style="font-size:1.1vw;color:#909090;line-height:1.6;">We design and deliver targeted candidate engagement campaigns that position our clients as the employer of choice.</div></div>'
++'</div></div></div>'],
+
+// 2 MARKET
+['dark','<div class="s" style="background:#1A1B1D;height:100%;position:relative;">'
++'<svg class="wave" viewBox="0 0 900 506" preserveAspectRatio="xMidYMid slice"><path d="M-50 300 Q200 100 450 350 T900 200" stroke="#73F5D1" stroke-width="1.5" fill="none"/><circle cx="720" cy="120" r="200" fill="#73F5D1" opacity="0.04"/></svg>'
++'<div style="position:relative;z-index:1;">'
++'<div style="display:flex;justify-content:flex-end;margin-bottom:6px;opacity:.35;gap:8px;"><span style="font-size:1vw;font-weight:700;color:#fff;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">02 / The Current Market</div>'
++'<div class="hdg hdg-w">The market has changed &mdash; hiring has not kept up</div>'
++'<div style="display:grid;grid-template-columns:1fr 1fr;gap:2.5%;">'
++'<div style="background:rgba(255,255,255,.05);border:1px solid rgba(115,245,209,.15);border-radius:4px;padding:3.5% 4%;margin-bottom:2%;"><div style="font-size:1.2vw;font-weight:600;color:#73F5D1;margin-bottom:3%;">The talent function has always needed elasticity.</div><div style="font-size:1vw;color:#909090;line-height:1.6;">Organisations scale up and down &mdash; hiring infrastructure rarely moves at the same speed.</div></div>'
++'<div style="background:rgba(255,255,255,.05);border:1px solid rgba(115,245,209,.15);border-radius:4px;padding:3.5% 4%;margin-bottom:2%;"><div style="font-size:1.2vw;font-weight:600;color:#73F5D1;margin-bottom:3%;">Macro-economic conditions are uncertain.</div><div style="font-size:1vw;color:#909090;line-height:1.6;">Budget pressure means every hire needs to be right first time.</div></div>'
++'<div style="background:rgba(255,255,255,.05);border:1px solid rgba(115,245,209,.15);border-radius:4px;padding:3.5% 4%;"><div style="font-size:1.2vw;font-weight:600;color:#73F5D1;margin-bottom:3%;">The TA market is flooded with candidates.</div><div style="font-size:1vw;color:#909090;line-height:1.6;">More CVs does not mean better hires &mdash; without AI, filtering signal from noise takes weeks.</div></div>'
++'<div style="background:rgba(255,255,255,.05);border:1px solid rgba(115,245,209,.15);border-radius:4px;padding:3.5% 4%;"><div style="font-size:1.2vw;font-weight:600;color:#73F5D1;margin-bottom:3%;">AI is reshaping how the best companies hire.</div><div style="font-size:1vw;color:#909090;line-height:1.6;">AI-selected candidates show 14% higher interview success rates.</div></div>'
++'</div>'
++'<div style="background:rgba(115,245,209,.1);border:1px solid rgba(115,245,209,.3);border-radius:4px;padding:1.5% 2.5%;text-align:center;margin-top:2%;"><span style="font-size:1.2vw;color:#73F5D1;font-weight:600;">This is where The Book comes in &mdash; </span><span style="font-size:1vw;color:#94a3b8;">Mastercards solution to finding the right talent partners, instantly.</span></div>'
++'</div></div>'],
+
+// 3 PROBLEM
+['light','<div class="s" style="background:#fff;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">03 / The Problem</div><div class="hdg hdg-b">The problem</div>'
++'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5%;margin-bottom:2.5%;">'
++'<div style="background:#F5F5F5;border-radius:3px;padding:4% 3%;text-align:center;"><div style="font-size:2.8vw;font-weight:300;color:#1A1B1D;">2&ndash;3</div><div style="font-size:.9vw;font-weight:600;color:#73F5D1;text-transform:uppercase;letter-spacing:1px;margin-top:1%;">Months</div><div style="font-size:1vw;color:#909090;margin-top:2%;line-height:1.5;">typical time to hire a senior TA partner</div></div>'
++'<div style="background:#F5F5F5;border-radius:3px;padding:4% 3%;text-align:center;"><div style="font-size:2.4vw;font-weight:300;color:#1A1B1D;">&pound;120K&ndash;180K</div><div style="font-size:1vw;color:#909090;margin-top:2%;line-height:1.5;">true all-in cost per senior TA hire</div></div>'
++'<div style="background:#F5F5F5;border-radius:3px;padding:4% 3%;text-align:center;"><div style="font-size:2.8vw;font-weight:300;color:#1A1B1D;">43%</div><div style="font-size:1vw;color:#909090;margin-top:2%;line-height:1.5;">of new hires leave within 90 days (CIPD)</div></div>'
++'</div>'
++'<div style="background:#F5F5F5;border-left:3px solid #73F5D1;padding:2.5% 3%;border-radius:0 3px 3px 0;">'
++'<div style="font-size:1.2vw;color:#1A1B1D;font-style:italic;line-height:1.7;">&ldquo;We know exactly who we need. We just can't find them fast enough &mdash; and by the time we do, the window's closed.&rdquo;</div>'
++'<div style="font-size:1vw;color:#909090;margin-top:1.5%;">&mdash; Senior Talent Leader, Global FinServ Firm</div>'
++'</div></div>'],
+
+// 4 INSIGHT
+['light','<div class="s" style="background:#fff;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">04 / The Insight</div><div class="hdg hdg-b">The insight</div>'
++'<div style="font-size:1.3vw;color:#909090;font-style:italic;line-height:1.8;margin-bottom:3%;">The best talent partners for Mastercard already exist. They've built your category. They know your competitors. They're just not visible to traditional search &mdash; because traditional search only looks in one or two places.</div>'
++'<div style="display:flex;gap:2%;align-items:flex-start;margin-bottom:2%;"><div style="min-width:22px;width:22px;height:22px;border-radius:50%;background:#9E57F6;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:10px;font-weight:700;color:#fff;">1</span></div><div style="font-size:1.2vw;color:#1A1B1D;line-height:1.6;">Our AI searches more talent pools simultaneously than any other platform &mdash; LinkedIn, niche networks, alumni databases, passive talent, and proprietary C2 sources</div></div>'
++'<div style="display:flex;gap:2%;align-items:flex-start;margin-bottom:2%;"><div style="min-width:22px;width:22px;height:22px;border-radius:50%;background:#9E57F6;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:10px;font-weight:700;color:#fff;">2</span></div><div style="font-size:1.2vw;color:#1A1B1D;line-height:1.6;">That breadth means we surface candidates your competitors have never seen</div></div>'
++'<div style="display:flex;gap:2%;align-items:flex-start;margin-bottom:2%;"><div style="min-width:22px;width:22px;height:22px;border-radius:50%;background:#1A1B1D;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:10px;font-weight:700;color:#fff;">3</span></div><div style="font-size:1.2vw;color:#1A1B1D;line-height:1.6;">Speed is built into the model &mdash; matched, vetted profiles served to you in under 4 hours, not weeks</div></div>'
++'<div style="display:flex;gap:2%;align-items:flex-start;"><div style="min-width:22px;width:22px;height:22px;border-radius:50%;background:#1A1B1D;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:10px;font-weight:700;color:#fff;">4</span></div><div style="font-size:1.2vw;color:#1A1B1D;line-height:1.6;">No other platform combines pool depth, FinServ curation, and same-day delivery</div></div>'
++'</div>'],
+
+// 5 SOLUTION
+['dark','<div class="s" style="background:#1A1B1D;height:100%;">'
++'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5%;"><div class="tblogo" style="font-size:1.6vw;"><span class="tb1">The&nbsp;</span><span class="tb2">Book</span></div><div class="mc"><div class="mcr" style="width:2.2vw;height:2.2vw;"></div><div class="mco" style="width:2.2vw;height:2.2vw;margin-left:-.9vw;"></div></div></div>'
++'<div class="lbl">05 / The Solution</div><div class="hdg hdg-w">Introducing The Book</div>'
++'<div style="font-size:1.1vw;color:#909090;margin-bottom:3%;max-width:80%;">AI that searches deeper and moves faster &mdash; matched talent partners served to Mastercard in hours, not months</div>'
++'<div style="display:flex;position:relative;margin-bottom:3%;">'
++'<div style="position:absolute;top:19px;left:10%;right:10%;height:1px;background:rgba(115,245,209,.15);"></div>'
++'<div style="flex:1;display:flex;flex-direction:column;align-items:center;z-index:1;"><div style="width:38px;height:38px;border-radius:50%;background:#9E57F6;display:flex;align-items:center;justify-content:center;margin-bottom:6%;"><span style="font-size:11px;font-weight:700;color:#fff;">01</span></div><div style="font-size:1.1vw;font-weight:600;color:#fff;text-align:center;">Deep Search</div><div style="font-size:.9vw;color:#909090;text-align:center;margin-top:1%;">AI scans more pools than any platform</div></div>'
++'<div style="flex:1;display:flex;flex-direction:column;align-items:center;z-index:1;"><div style="width:38px;height:38px;border-radius:50%;background:#1A1B1D;border:1.5px solid #73F5D1;display:flex;align-items:center;justify-content:center;margin-bottom:6%;"><span style="font-size:11px;font-weight:700;color:#73F5D1;">02</span></div><div style="font-size:1.1vw;font-weight:600;color:#fff;text-align:center;">Instant Match</div><div style="font-size:.9vw;color:#909090;text-align:center;margin-top:1%;">Scored and ranked in seconds</div></div>'
++'<div style="flex:1;display:flex;flex-direction:column;align-items:center;z-index:1;"><div style="width:38px;height:38px;border-radius:50%;background:#1A1B1D;border:1.5px solid #73F5D1;display:flex;align-items:center;justify-content:center;margin-bottom:6%;"><span style="font-size:11px;font-weight:700;color:#73F5D1;">03</span></div><div style="font-size:1.1vw;font-weight:600;color:#fff;text-align:center;">C2 Engages</div><div style="font-size:.9vw;color:#909090;text-align:center;margin-top:1%;">We vet and brief candidates</div></div>'
++'<div style="flex:1;display:flex;flex-direction:column;align-items:center;z-index:1;"><div style="width:38px;height:38px;border-radius:50%;background:#1A1B1D;border:1.5px solid #73F5D1;display:flex;align-items:center;justify-content:center;margin-bottom:6%;"><span style="font-size:11px;font-weight:700;color:#73F5D1;">04</span></div><div style="font-size:1.1vw;font-weight:600;color:#fff;text-align:center;">Connect</div><div style="font-size:.9vw;color:#909090;text-align:center;margin-top:1%;">Chat and check availability</div></div>'
++'<div style="flex:1;display:flex;flex-direction:column;align-items:center;z-index:1;"><div style="width:38px;height:38px;border-radius:50%;background:#1A1B1D;border:1.5px solid #73F5D1;display:flex;align-items:center;justify-content:center;margin-bottom:6%;"><span style="font-size:11px;font-weight:700;color:#73F5D1;">05</span></div><div style="font-size:1.1vw;font-weight:600;color:#fff;text-align:center;">Book</div><div style="font-size:.9vw;color:#909090;text-align:center;margin-top:1%;">Confirmed in under 24 hrs</div></div>'
++'</div>'
++'<div style="background:rgba(115,245,209,.1);border:1px solid rgba(115,245,209,.3);border-radius:3px;padding:1.5% 2%;font-size:1.1vw;color:#73F5D1;text-align:center;">C2 Engagement Badge &mdash; every candidate is actively vetted, briefed, and availability-confirmed before you speak to them</div>'
++'</div>'],
+
+// 6 DIFF
+['light','<div class="s" style="background:#fff;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">06 / Differentiation</div><div class="hdg hdg-b">Why The Book beats everything else</div>'
++'<div style="border:1px solid #E8E8E8;border-radius:3px;overflow:hidden;">'
++'<div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;background:#212B5F;padding:1.2% 2%;"><div style="font-size:.9vw;font-weight:600;color:#7a8fc0;letter-spacing:1px;text-transform:uppercase;">Feature</div><div style="font-size:.9vw;font-weight:600;color:#7a8fc0;letter-spacing:1px;text-transform:uppercase;text-align:center;">Traditional</div><div style="font-size:.9vw;font-weight:700;color:#9E57F6;letter-spacing:1px;text-transform:uppercase;text-align:center;">The Book</div></div>'
++'<div class="trow" style="background:#fff;"><div class="tcell">Talent pools searched</div><div class="tgrey tcell">1-2 (LinkedIn + agency DB)</div><div class="tbook tcell"><span class="tdot"></span>57+ pools simultaneously</div></div>'
++'<div class="trow" style="background:#F5F5F5;"><div class="tcell">Time to first matched candidate</div><div class="tgrey tcell">6-12 weeks</div><div class="tbook tcell"><span class="tdot"></span>Instant</div></div>'
++'<div class="trow" style="background:#fff;"><div class="tcell">Pre-vetted for FinServ</div><div class="tgrey tcell">Generic pool</div><div class="tbook tcell"><span class="tdot"></span>Curated C2 network</div></div>'
++'<div class="trow" style="background:#F5F5F5;"><div class="tcell">Flexible engagement model</div><div class="tgrey tcell">Full-time only</div><div class="tbook tcell"><span class="tdot"></span>Day rate, retainer, project</div></div>'
++'<div class="trow" style="background:#fff;"><div class="tcell">Candidate commitment</div><div class="tgrey tcell">Passive / uncommitted</div><div class="tbook tcell"><span class="tdot"></span>Points + equity model</div></div>'
++'<div class="trow" style="background:#F5F5F5;"><div class="tcell">Your relationship lock-in</div><div class="tgrey tcell">None</div><div class="tbook tcell"><span class="tdot"></span>Virtual Bench ownership</div></div>'
++'</div></div>'],
+
+// 7 EQUITY
+['light','<div class="s" style="background:#F5F5F5;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">07 / The Equity Model</div><div class="hdg hdg-b">Why candidates show up motivated</div>'
++'<div style="font-size:1.1vw;color:#909090;margin-bottom:2%;">The Book's Points and Equity Engine creates aligned, high-performing partners</div>'
++'<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5%;margin-bottom:2%;">'
++'<div class="card p-border"><div class="cnum cpurp">01</div><div class="ctitle">Earn points per booking</div><div class="cbody">150 pts per confirmed engagement</div></div>'
++'<div class="card p-border"><div class="cnum cpurp">02</div><div class="ctitle">Reviews amplify points</div><div class="cbody">+75 for 5-star, -100 for poor delivery</div></div>'
++'<div class="card t-border"><div class="cnum cteal">03</div><div class="ctitle">Points convert to equity</div><div class="cbody">1,000 pts = 0.01% platform stake</div></div>'
++'<div class="card t-border"><div class="cnum cteal">04</div><div class="ctitle">Vesting creates retention</div><div class="cbody">24-month vest keeps talent committed</div></div>'
++'</div>'
++'<div style="background:#1A1B1D;border-radius:3px;padding:2% 2.5%;font-size:1.2vw;color:#fff;line-height:1.6;"><span style="color:#73F5D1;font-weight:600;">Result: </span>Mastercard gets talent partners with genuine skin in the game &mdash; not freelancers looking for the next cheque.</div>'
++'</div>'],
+
+// 8 PROOF
+['light','<div class="s" style="background:#fff;height:100%;position:relative;">'
++'<div class="wm"><span style="font-size:1vw;font-weight:700;color:#1A1B1D;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.3vw;height:1.3vw;"></div><div class="mco" style="width:1.3vw;height:1.3vw;margin-left:-.5vw;"></div></div></div>'
++'<div class="lbl">08 / Proof of Relevance</div><div class="hdg hdg-b">Built for Mastercard's world</div>'
++'<div style="display:flex;gap:2.5%;padding:1.5% 0;border-bottom:1px solid #E8E8E8;"><div class="badge">PS</div><div><div class="pname">Priya Sharma</div><div class="prole">Brand Strategy Director &middot; <span style="color:#9E57F6;font-weight:600;">Ex-Visa</span></div><div class="pnote">Led Visa's EMEA brand refresh. Available now.</div></div></div>'
++'<div style="display:flex;gap:2.5%;padding:2% 0;border-bottom:1px solid #E8E8E8;"><div class="badge">MR</div><div><div class="pname">Marcus Reid</div><div class="prole">Head of Partnerships &middot; <span style="color:#9E57F6;font-weight:600;">Ex-Mastercard</span></div><div class="pnote">Built Mastercard's B2B fintech partner programme. Open to re-engage.</div></div></div>'
++'<div style="display:flex;gap:2.5%;padding:2% 0;"><div class="badge">LO</div><div><div class="pname">Lena Okafor</div><div class="prole">CMO-in-Residence &middot; <span style="color:#9E57F6;font-weight:600;">Ex-AmEx</span></div><div class="pnote">Premium card proposition and luxury co-brand specialist.</div></div></div>'
++'</div>'],
+
+// 9 DEMO
+['dark','<div class="s" style="background:#1A1B1D;height:100%;display:flex;flex-direction:column;">'
++'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5%;"><div><div class="lbl">09 / Live Demo</div><div style="font-size:2.6vw;font-weight:300;color:#fff;">From brief to matched candidates &mdash; instantly</div></div><div class="mc"><div class="mcr" style="width:2.2vw;height:2.2vw;"></div><div class="mco" style="width:2.2vw;height:2.2vw;margin-left:-.9vw;"></div></div></div>'
++'<div style="flex:1;background:#0D0D1A;border:1px solid #9E57F6;border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3%;padding:4%;">'
++'<a href="https://thebook-frontend-prototypes-igcv3jk3p-chapter2.vercel.app/calendar" target="_blank" style="font-size:2.6vw;font-weight:700;color:#73F5D1;text-decoration:none;text-align:center;">&#9654; Launch Live Demo</a>'
++'<div style="font-size:.9vw;color:#444;text-align:center;">thebook-frontend-prototypes-igcv3jk3p-chapter2.vercel.app/calendar</div>'
++'<div style="font-size:.9vw;color:#444;text-align:center;">Login: your chapter2 email &middot; Password: M4g1cP4ssw0rd</div>'
++'</div></div>'],
+
+// 10 ASK
+['dark','<div class="s" style="background:#1A1B1D;height:100%;">'
++'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1%;"><div><div class="lbl">10 / The Ask</div><div class="hdg hdg-w">What we're asking for</div></div><div class="mc"><div class="mcr" style="width:2.2vw;height:2.2vw;"></div><div class="mco" style="width:2.2vw;height:2.2vw;margin-left:-.9vw;"></div></div></div>'
++'<div style="display:flex;gap:2.5%;padding:1.5% 0;border-bottom:1px solid #222;"><div style="font-size:2.6vw;font-weight:300;color:#9E57F6;min-width:4%;">01</div><div><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:.4%;">Pilot brief</div><div style="font-size:1.1vw;color:#909090;line-height:1.5;">Share one live hiring need &mdash; we'll fill it in under 24 hours at zero risk</div></div></div>'
++'<div style="display:flex;gap:2.5%;padding:1.5% 0;border-bottom:1px solid #222;"><div style="font-size:2.6vw;font-weight:300;color:#9E57F6;min-width:4%;">02</div><div><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:.4%;">30-day trial</div><div style="font-size:1.1vw;color:#909090;line-height:1.5;">Full Partner access, no commitment, benchmark us against your current process</div></div></div>'
++'<div style="display:flex;gap:2.5%;padding:1.5% 0;"><div style="font-size:2.6vw;font-weight:300;color:#9E57F6;min-width:4%;">03</div><div><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:.4%;">Strategic conversation</div><div style="font-size:1.1vw;color:#909090;line-height:1.5;">Explore a deeper partnership &mdash; co-investment, white-label, or talent equity</div></div></div>'
++'<div style="background:rgba(158,87,246,.18);border:1px solid rgba(158,87,246,.4);border-radius:3px;padding:2% 2.5%;margin-top:1%;">'
++'<div style="font-size:1.4vw;font-weight:600;color:#fff;margin-bottom:1.5%;">If we don't beat your current time-to-hire by 80%, you pay nothing.</div>'
++'<div style="display:flex;justify-content:space-between;align-items:center;"><div class="tblogo" style="font-size:1.3vw;"><span class="tb1">The&nbsp;</span><span class="tb2">Book</span></div><div style="display:flex;align-items:center;gap:8px;"><span style="font-size:1.1vw;font-weight:700;color:#fff;letter-spacing:2px;">CHAPTER 2</span><div class="mc"><div class="mcr" style="width:1.6vw;height:1.6vw;"></div><div class="mco" style="width:1.6vw;height:1.6vw;margin-left:-.6vw;"></div></div></div></div>'
++'</div></div>'],
+
+// 11 THANK YOU
+['cover','<div class="s" style="background:#1A1B1D;height:100%;display:flex;align-items:center;justify-content:center;position:relative;">'
++'<svg class="wave" viewBox="0 0 900 506" preserveAspectRatio="xMidYMid slice"><path d="M-50 300 Q200 100 450 350 T900 200" stroke="#73F5D1" stroke-width="1.5" fill="none"/><circle cx="720" cy="120" r="200" fill="#73F5D1" opacity="0.04"/></svg>'
++'<div style="text-align:center;position:relative;z-index:1;"><div style="font-size:6vw;font-weight:300;color:#fff;letter-spacing:-2px;margin-bottom:3%;">Thank you.</div><div style="font-size:1.8vw;color:#73F5D1;">Let's start with one brief.</div></div>'
++'</div>'],
+
+// 12 APPENDIX
+['dark','<div class="s" style="background:#1A1B1D;height:100%;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><div style="font-size:1vw;font-weight:700;color:#73F5D1;letter-spacing:3px;text-transform:uppercase;margin-bottom:3%;">Appendix</div><div style="font-size:2.6vw;font-weight:300;color:#fff;margin-bottom:4%;">Commercial model</div><div style="width:40px;height:2px;background:#9E57F6;margin:0 auto;"></div></div></div>'],
+
+// 13 MODEL
+['dark','<div class="s" style="background:#1A1B1D;height:100%;">'
++'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5%;"><div><div class="lbl">Appendix / Commercial Model</div><div class="hdg hdg-w">Simple commercial model</div></div><div class="mc"><div class="mcr" style="width:2vw;height:2vw;"></div><div class="mco" style="width:2vw;height:2vw;margin-left:-.8vw;"></div></div></div>'
++'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5%;">'
++'<div style="background:#1e1f22;border:1px solid #2e2f32;border-radius:3px;padding:3.5%;display:flex;flex-direction:column;"><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:1.5%;">Starter</div><div style="margin-bottom:3%;"><span style="font-size:2.2vw;font-weight:300;color:#fff;">&pound;0</span> <span style="font-size:1vw;color:#909090;">First placement</span></div><div style="flex:1;font-size:1vw;color:#909090;line-height:2;"><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> 3 AI searches/month</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> Up to 2 bench slots</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> C2 light engagement</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> Standard SLA 72hrs</div></div><div style="text-align:center;padding:6% 0;border-radius:2px;font-size:1vw;font-weight:600;border:1px solid #73F5D1;color:#73F5D1;margin-top:auto;">Try free</div></div>'
++'<div style="background:rgba(158,87,246,.12);border:1.5px solid #9E57F6;border-radius:3px;padding:3.5%;display:flex;flex-direction:column;"><div style="font-size:.8vw;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#9E57F6;margin-bottom:3%;">Recommended</div><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:1.5%;">Partner</div><div style="margin-bottom:3%;"><span style="font-size:2.2vw;font-weight:300;color:#fff;">&pound;4,500</span> <span style="font-size:1vw;color:#909090;">/month</span></div><div style="flex:1;font-size:1vw;color:#909090;line-height:2;"><div><span style="color:#9E57F6;font-weight:700;">&mdash;</span> Unlimited searches</div><div><span style="color:#9E57F6;font-weight:700;">&mdash;</span> 10 bench slots</div><div><span style="color:#9E57F6;font-weight:700;">&mdash;</span> Full C2 engagement</div><div><span style="color:#9E57F6;font-weight:700;">&mdash;</span> SLA 24hrs</div><div><span style="color:#9E57F6;font-weight:700;">&mdash;</span> Dedicated account lead</div></div><div style="text-align:center;padding:6% 0;border-radius:2px;font-size:1vw;font-weight:600;background:#9E57F6;color:#fff;margin-top:auto;">Most popular</div></div>'
++'<div style="background:#1e1f22;border:1px solid #2e2f32;border-radius:3px;padding:3.5%;display:flex;flex-direction:column;"><div style="font-size:1.3vw;font-weight:600;color:#fff;margin-bottom:1.5%;">Enterprise</div><div style="margin-bottom:3%;"><span style="font-size:2.2vw;font-weight:300;color:#fff;">Custom</span></div><div style="flex:1;font-size:1vw;color:#909090;line-height:2;"><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> White-label option</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> Unlimited bench</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> Priority SLA 4hrs</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> API access</div><div><span style="color:#73F5D1;font-weight:700;">&mdash;</span> Equity co-investment</div></div><div style="text-align:center;padding:6% 0;border-radius:2px;font-size:1vw;font-weight:600;border:1px solid #73F5D1;color:#73F5D1;margin-top:auto;">Talk to us</div></div>'
++'</div></div>']
+];
+
+var cur = 0;
+function render() {
+  document.getElementById('slide-inner').innerHTML = slides[cur][1];
+  document.getElementById('counter').textContent = (cur+1) + ' of ' + slides.length + ' · chapter2.agency';
+  document.getElementById('prev').disabled = cur === 0;
+  var nb = document.getElementById('next');
+  nb.disabled = cur === slides.length - 1;
+  nb.className = cur === slides.length - 1 ? 'btn' : 'btnn';
+  var d = document.getElementById('dots');
+  d.innerHTML = '';
+  for (var i = 0; i < slides.length; i++) {
+    var b = document.createElement('button');
+    b.className = 'dot ' + (i === cur ? 'don' : 'dof');
+    b.setAttribute('onclick', 'jump(' + i + ')');
+    d.appendChild(b);
+  }
+}
+function go(n) { cur = Math.max(0, Math.min(slides.length - 1, cur + n)); render(); }
+function jump(i) { cur = i; render(); }
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') go(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(-1);
+});
+render();
+})();
+</script>
+</body>
+</html>
